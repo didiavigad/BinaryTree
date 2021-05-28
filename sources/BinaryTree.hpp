@@ -5,24 +5,18 @@ namespace ariel {
 
     template<typename T> class BinaryTree{
         
-        private:
+        public:
             struct Node{
                 T value;
                 Node *left, *right;
                 
-                Node(T &val = 0, Node *l = nullptr, Node *r = nullptr) : value(val), left(l), right(r) {}
-
-                ~Node(){
-                    delete left;
-                    delete right;
-                }
+                Node(T val) : value(val), left(nullptr), right(nullptr) {}
+                ~Node(){}
             };
 
             Node *root;
         
-        public:
             BinaryTree() : root() {}
-
             ~BinaryTree(){}
 
             BinaryTree& add_root(T val){
@@ -38,18 +32,15 @@ namespace ariel {
             }
 
             friend std::ostream &operator<<(std::ostream &os, const BinaryTree<T>& binaryTree){
-                
                 return os;
             }
 
        
             class Inorder{
-                private:
+                public:
                     Node *node;
 
-                public:
-
-                    Inorder(Node* ptr = nullptr) : node(ptr){}
+                    Inorder(Node*) : node(nullptr){}
                     
                     T& operator*() const{
                         return node->value;
@@ -81,7 +72,7 @@ namespace ariel {
 
                 public:
 
-                    Postorder(Node* ptr = nullptr) : node(ptr){}     
+                    Postorder(Node* ) : node(nullptr){}     
 
                     T& operator*() const{
                         return node->value;
@@ -106,12 +97,11 @@ namespace ariel {
 
             };
                  class Preorder{
-                private:
+                public:
                     Node *node;       
 
-                public:
 
-                    Preorder(Node* ptr = nullptr) : node(ptr){}       
+                    Preorder(Node*) : node(nullptr){}       
             
                     T& operator*() const{
                         return node->value;
@@ -130,26 +120,18 @@ namespace ariel {
                     }
 
                     bool operator==(const Preorder& p) const{return true;}
-                    
                     bool operator!=(const Preorder& p) const{return false;}   
 
             }; 
 
 
             Preorder begin_preorder(){return Preorder{root};}
-
             Preorder end_preorder(){return Preorder{root};} 
-
             Inorder begin_inorder(){return Inorder{root};}
-
             Inorder end_inorder(){return Inorder{root};}
-
             Postorder begin_postorder(){return Postorder{root};}
-
             Postorder end_postorder(){return Postorder{root};}
-
             Inorder begin(){return Inorder{root};}
-			
             Inorder end(){return Inorder{root};}
 
     };
